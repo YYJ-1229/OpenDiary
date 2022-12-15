@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: od
+  labels:
+    app: od
+spec:
+  replicas: 3
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: od
+  template:
+    metadata:
+      labels:
+        app: od
+        tier: od
+    spec:
+      containers:
+      - name: od
+        image: YYJ-1229/od:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+          name: hello
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: od
+  labels:
+    app: hellodo
+spec:
+  ports:
+  - port: 80
+    targetPort: 3000
+  selector:
+    app: od
+    tier: od
+  type: LoadBalancer
