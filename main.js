@@ -1,28 +1,37 @@
-const { spawn } = require('child_process');
-const request = require('request');
-const test = require('tape');
+var http = require('http');
+var url = require('url');
+var qs = require('querystring');
+var template = require('./lib/template.js');
+var db = require('./lib/db.js');
+var topic = require('./lib/topic');
 
-// Start the app
-const env = Object.assign({}, process.env, {PORT: 5000});
-const child = spawn('node', ['index.js'], {env});
-
-test('responds to requests', (t) => {
-  t.plan(4);
-
-  // Wait until the server is ready
-  child.stdout.on('data', _ => {
-    // Make a request to our app
-    request('http://127.0.0.1:5000', (error, response, body) => {
-      // stop the server
-      child.kill();
-
-      // No error
-      t.false(error);
-      // Successful response
-      t.equal(response.statusCode, 200);
-      // Assert content checks
-      t.notEqual(body.indexOf("<title>Node.js Getting Started on Heroku</title>"), -1);
-      t.notEqual(body.indexOf("Getting Started with Node on Heroku"), -1);
-    });
-  });
+var app = http.createServer(function(request, response) {
+    var _url = request.url;
+    var queryData = url.parse(_url, true).query;
+    var pathname = url.parse(_url, true).pathname;
+    if(pathname === '/') {
+        if(queryData.id === undefined) {
+            topic.home(request, response);
+        } else {
+            topic.page(request,response);
+        }
+    } else if(pathname === '/create') {
+        topic.create(request, response);
+    } else if(pathname === '/create_process') {
+        topic.create_process(request,response);
+    } else if(pathname === '/update') {
+        topic.update(request, response);
+    } else if(pathname === '/update_process') {
+        topic.update_process(request, response);
+    } else if(pathname === '/update') {
+      topic.update(request, response);
+    } else if(pathname === '/update_process') {
+      topic.update_process(request, response);
+    } else if(pathname === '/delete_process') {
+      topic.delete_process(request,response);
+    } else {
+        response.writeHead(404);
+        response.end('Not found');
+    }
 });
+app.listen(3000);
