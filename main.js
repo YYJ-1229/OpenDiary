@@ -4,6 +4,7 @@ var qs = require('querystring');
 var template = require('./lib/template.js');
 var db = require('./lib/db.js');
 var topic = require('./lib/topic');
+var author = require('./lib/author');
 
 var app = http.createServer(function(request, response) {
     var _url = request.url;
