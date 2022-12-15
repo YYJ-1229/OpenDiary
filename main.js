@@ -47,4 +47,10 @@ var app = http.createServer(function(request, response) {
         response.end('Not found');
     }
 });
-app.listen(3000);
+
+// Constants
+const PORT = process.env.PORT || 80;
+
+
+app.listen(PORT);
+console.log('Running on http://localhost:' + PORT);
