@@ -22,7 +22,7 @@ spec:
         image: YYJ-1229/od:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 5000
+        - containerPort: 3000
           name: hello
 ---
 apiVersion: v1
@@ -30,7 +30,7 @@ kind: Service
 metadata:
   name: od
   labels:
-    app: hellodo
+    app: od
 spec:
   ports:
   - port: 80
