@@ -20,6 +20,7 @@ spec:
       - name: od
         image: yangdori/od:latest
         imagePullPolicy: Always
+        command: ['sh', '-c', 'echo 'od && sleep 6000']
         ports:
         - containerPort: 3000
           name: od
