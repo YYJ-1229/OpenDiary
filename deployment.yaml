@@ -21,7 +21,7 @@ spec:
         image: yangdori/od:latest
         imagePullPolicy: Always
         ports:
-        - containerPort: 5000
+        - containerPort: 3000
           name: od
 ---
 apiVersion: v1
@@ -33,7 +33,7 @@ metadata:
 spec:
   ports:
   - port: 80
-    targetPort: 5000
+    targetPort: 3000
   selector:
     app: od
     tier: od
