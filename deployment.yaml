@@ -5,7 +5,6 @@ metadata:
   labels:
     app: od
 spec:
-  replicas: 1
   strategy:
     type: Recreate
   selector:
