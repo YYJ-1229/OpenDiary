@@ -15,7 +15,7 @@ pipeline {
         stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("yangdori/od:${env.BUILD_ID}")
+                    myapp = docker.build("yangdori/hello:${env.BUILD_ID}")
                 }
             }
         }
