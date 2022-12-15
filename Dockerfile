@@ -15,7 +15,6 @@ ENV NODE_ENV="production"
 COPY --from=builder /app /app
 WORKDIR /app
 ENV PORT 3000
-
 EXPOSE 3000
 
 # Start the application
