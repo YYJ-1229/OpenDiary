@@ -48,9 +48,5 @@ var app = http.createServer(function(request, response) {
     }
 });
 
-// Constants
-const PORT = process.env.PORT || 80;
-
-
-app.listen(PORT);
+app.listen(3000);
 console.log('Running on http://localhost:' + PORT);
